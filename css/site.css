@@ -64,7 +64,7 @@ a:hover{text-decoration:underline}
 /* Right Panel */
 .info-section{margin-bottom:20px}
 .section-title{font-size:0.8rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.chinese-block{font-size:1rem;line-height:1.8;padding:12px 16px;background:var(--accent-light);border-radius:8px;border-left:3px solid var(--accent);white-space:pre-wrap}
+.chinese-block{font-size:1rem;line-height:1.8;padding:12px 16px;background:#fffbeb;border-radius:8px;border-left:3px solid var(--accent);white-space:pre-wrap}
 
 /* Vocab */
 .vocab-grid{display:flex;flex-wrap:wrap;gap:4px}

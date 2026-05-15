@@ -20,8 +20,8 @@
       <div class="lesson-num">第 133-134 课</div>
       <div class="lesson-title">Sensational news爆炸性新闻</div>
     </div>
-    <button class="play-btn" id="playBtn" onclick="ta()" title="播放/暂停">▶</button>
-    <div class="audio-track" id="track" onclick="sk(event)">
+    <button class="play-btn" id="playBtn" title="播放/暂停">▶</button>
+    <div class="audio-track" id="track">
       <div class="audio-fill" id="fill"></div>
     </div>
     <span class="audio-time" id="curTime">0:00</span>
@@ -138,31 +138,29 @@
   </div>
 </div>
 
-<!-- Minimal inline JS for audio seeking with precise timestamps -->
 <script>
 (function(){
-var au=new Audio(&quot;https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/133%26134%EF%BC%8DSensational%20News.mp3&quot;);
+var au=new Audio('https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/133%26134%EF%BC%8DSensational%20News.mp3');
 var pl=document.getElementById('playBtn');
 var fl=document.getElementById('fill');
 var ct=document.getElementById('curTime');
 var tr=document.getElementById('track');
-var playing=false;
-au.addEventListener('timeupdate',function(){
-  if(au.duration){fl.style.width=(au.currentTime/au.duration*100)+'%';
-  var m=Math.floor(au.currentTime/60),s=Math.floor(au.currentTime%60);
-  ct.textContent=m+':'+(s<10?'0':'')+s;}
-});
-au.addEventListener('ended',function(){playing=false;pl.textContent='▶';pl.classList.remove('on');});
-function ta(){
+pl.addEventListener('click',function(){
   if(au.paused||au.ended){au.play();pl.textContent='⏸';pl.classList.add('on');}
   else{au.pause();pl.textContent='▶';pl.classList.remove('on');}
-}
+});
 function sk(e){
   if(!au.duration)return;
   var r=tr.getBoundingClientRect();
   au.currentTime=((e.clientX-r.left)/r.width)*au.duration;
   if(au.paused){au.play();pl.textContent='⏸';pl.classList.add('on');}
 }
+function fm(t){var m=Math.floor(t/60),s=Math.floor(t%60);return m+':'+(s<10?'0':'')+s;}
+au.addEventListener('timeupdate',function(){
+  if(au.duration){fl.style.width=(au.currentTime/au.duration*100)+'%';ct.textContent=fm(au.currentTime);}
+});
+au.addEventListener('ended',function(){pl.textContent='▶';pl.classList.remove('on');});
+tr.addEventListener('click',sk);
 // Click sentence: seek to exact start time and play
 document.querySelectorAll('.sentence-item').forEach(function(el){
   el.addEventListener('click',function(e){
@@ -175,20 +173,15 @@ document.querySelectorAll('.sentence-item').forEach(function(el){
     history.replaceState(null,'',el.getAttribute('href'));
   });
 });
-// Keyboard: arrow keys navigate sentences
+// Keyboard shortcuts
 document.addEventListener('keydown',function(e){
   var items=document.querySelectorAll('.sentence-item');
   var cur=document.querySelector('.sentence-item.s-target')||items[0];
+  if(!cur||!items.length)return;
   var idx=Array.from(items).indexOf(cur);
-  if(e.key==='ArrowDown'||e.key==='ArrowRight'){
-    e.preventDefault();
-    if(idx<items.length-1) items[idx+1].click();
-  }else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){
-    e.preventDefault();
-    if(idx>0) items[idx-1].click();
-  }else if(e.key===' '){
-    e.preventDefault();ta();
-  }
+  if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();if(idx<items.length-1) items[idx+1].click();}
+  else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();if(idx>0) items[idx-1].click();}
+  else if(e.key===' '||e.key==='Space'){e.preventDefault();pl.click();}
 });
 })();
 </script>
