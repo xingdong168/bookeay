@@ -11,13 +11,61 @@
 .trans-item:nth-child(odd){background:#f0f4ff}
 .trans-idx{font-size:11px;color:#999;font-weight:700;min-width:20px}
 .trans-text{font-size:15px;color:#333;line-height:1.6}
-.vocab-toolbar{margin-bottom:8px}
-.vocab-toggle{font-size:13px;padding:4px 12px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;color:#666}
-.vocab-toggle:hover{background:#f5f5f5}
-.vocab-grid .word-item{cursor:pointer;transition:background .15s}
-.vocab-grid .word-item:hover{background:#e8f0fe!important}
-.vocab-grid .word-item.speaking{background:#fff3cd!important}
-.vocab-grid .word-item .cn.hidden{visibility:hidden}
+
+/* Vocab Learning */
+.vlearn-wrap{font-size:14px}
+.vlearn-modes{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.vlearn-mode-btn{padding:5px 10px;border:1px solid #dee2e6;border-radius:6px;background:#fff;font-size:13px;cursor:pointer;color:#555;transition:all .15s}
+.vlearn-mode-btn:hover{background:#f0f4ff;border-color:#4a90d9}
+.vlearn-mode-btn.active{background:#4a90d9;color:#fff;border-color:#4a90d9}
+.vlearn-progress{font-size:12px;color:#999;margin-bottom:8px}
+.vlearn-card{padding:16px;border-radius:8px;background:#fff;border:1px solid #e8e8e8;min-height:140px}
+.vlearn-chinese{font-size:18px;font-weight:700;color:#333;margin-bottom:12px;text-align:center}
+.vlearn-word{font-size:22px;font-weight:700;color:#4a90d9;margin-bottom:12px;text-align:center;letter-spacing:2px}
+.vlearn-word .blank{color:#e74c3c;border-bottom:2px solid #e74c3c;padding:0 4px;font-weight:700}
+.vlearn-word .shown{color:#2c3e50}
+.vlearn-input-wrap{display:flex;gap:8px;margin:12px 0}
+.vlearn-input{flex:1;padding:8px 12px;border:2px solid #ddd;border-radius:6px;font-size:16px;outline:none;transition:border-color .15s}
+.vlearn-input:focus{border-color:#4a90d9}
+.vlearn-input.correct{border-color:#27ae60;background:#eafaf1}
+.vlearn-input.wrong{border-color:#e74c3c;background:#fdedec}
+.vlearn-btn{padding:8px 16px;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600}
+.vlearn-btn:disabled{opacity:.5;cursor:default}
+.vlearn-btn-check{background:#4a90d9;color:#fff}
+.vlearn-btn-check:hover:not(:disabled){background:#3a7bc8}
+.vlearn-btn-hint{background:#f0f0f0;color:#666}
+.vlearn-btn-hint:hover{background:#e0e0e0}
+.vlearn-btn-skip{background:#f0f0f0;color:#999}
+.vlearn-btn-skip:hover{background:#e0e0e0}
+.vlearn-btn-play{background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9;padding:8px 16px;border-radius:6px;font-size:14px;cursor:pointer}
+.vlearn-btn-play:hover{background:#c8e6c9}
+.vlearn-feedback{margin-top:8px;padding:8px 12px;border-radius:6px;font-size:14px;text-align:center;display:none}
+.vlearn-feedback.show{display:block}
+.vlearn-feedback.ok{background:#eafaf1;color:#27ae60;border:1px solid #c8e6c9}
+.vlearn-feedback.fail{background:#fdedec;color:#e74c3c;border:1px solid #f5c6cb}
+
+/* Matching mode */
+.vlearn-match-wrap{display:flex;gap:16px;justify-content:center}
+.vlearn-match-col{display:flex;flex-direction:column;gap:6px;flex:1;max-width:160px}
+.vlearn-match-item{padding:8px 10px;border:2px solid #ddd;border-radius:6px;text-align:center;cursor:pointer;font-size:14px;transition:all .15s}
+.vlearn-match-item:hover{border-color:#999}
+.vlearn-match-item.selected{border-color:#4a90d9;background:#eef4ff}
+.vlearn-match-item.matched{border-color:#27ae60;background:#eafaf1;cursor:default;opacity:.7}
+.vlearn-match-item.wrong{border-color:#e74c3c;background:#fdedec}
+
+/* Multiple choice */
+.vlearn-choices{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.vlearn-choice{padding:10px 14px;border:2px solid #ddd;border-radius:8px;cursor:pointer;font-size:15px;text-align:center;transition:all .15s}
+.vlearn-choice:hover{border-color:#4a90d9}
+.vlearn-choice.selected{border-color:#4a90d9;background:#eef4ff}
+.vlearn-choice.correct{border-color:#27ae60;background:#eafaf1;color:#27ae60}
+.vlearn-choice.wrong{border-color:#e74c3c;background:#fdedec;color:#e74c3c}
+
+/* Score */
+.vlearn-score{margin-top:12px;padding:12px;background:#f8f9fa;border-radius:8px;text-align:center;display:none}
+.vlearn-score.show{display:block}
+.vlearn-score h3{color:#333;margin:0 0 8px}
+.vlearn-score .stat{font-size:28px;font-weight:700;color:#4a90d9}
 </style>
 </head>
 <body>
@@ -93,51 +141,8 @@
         </div>
       </div>
       <div class="info-section">
-        <div class="section-title">📝 单词</div>
-        <div class="vocab-toolbar"><button class="vocab-toggle" id="vocabToggle" title="隐藏中文自测">🙈 隐藏中文</button></div>
-<div class="vocab-grid" id="vocabGrid">
-<div class="word-item" data-en="excuse">
-  <span class="en">excuse</span>
-  <span class="cn">v. 原谅</span>
-</div>
-<div class="word-item" data-en="me">
-  <span class="en">me</span>
-  <span class="cn">pron. 我（宾格）</span>
-</div>
-<div class="word-item" data-en="yes">
-  <span class="en">yes</span>
-  <span class="cn">adv. 是的</span>
-</div>
-<div class="word-item" data-en="is">
-  <span class="en">is</span>
-  <span class="cn">v. be动词第三人称单数</span>
-</div>
-<div class="word-item" data-en="this">
-  <span class="en">this</span>
-  <span class="cn">pron. 这</span>
-</div>
-<div class="word-item" data-en="your">
-  <span class="en">your</span>
-  <span class="cn">possessive adj. 你的；你们的</span>
-</div>
-<div class="word-item" data-en="handbag">
-  <span class="en">handbag</span>
-  <span class="cn">n. （女用）手提包</span>
-</div>
-<div class="word-item" data-en="pardon">
-  <span class="en">pardon</span>
-  <span class="cn">int. 原谅，请再说一遍</span>
-</div>
-<div class="word-item" data-en="thank you">
-  <span class="en">thank you</span>
-  <span class="cn">感谢你（们）</span>
-</div>
-<div class="word-item" data-en="very much">
-  <span class="en">very much</span>
-  <span class="cn">非常地</span>
-</div>
-</div>
-
+        <div class="section-title">📝 单词学习</div>
+        <div id="vlearnRoot" class="vlearn-wrap"><!-- Vocab learning injected by JS --></div>
       </div>
       <div class="info-section">
         <div class="section-title">📖 课文详注</div>
@@ -156,6 +161,7 @@
 
 <script>
 (function(){
+// ─── Audio Controls ───
 var au=document.getElementById('lessonAudio');
 au.src='https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/001%26002%EF%BC%8DExcuse%20Me.mp3';
 au.load();
@@ -196,6 +202,7 @@ document.querySelectorAll('.sentence-item').forEach(function(el){
   });
 });
 document.addEventListener('keydown',function(e){
+  if(document.querySelector('.vlearn-input:focus'))return;
   var items=document.querySelectorAll('.sentence-item');
   var cur=document.querySelector('.sentence-item.s-target')||items[0];
   if(!cur||!items.length)return;
@@ -212,43 +219,408 @@ au.addEventListener('error',function(){
   au.style.width='100%';
   au.style.margin='4px 0';
 });
-// ─── Vocab TTS ───
-var vocabItems=document.querySelectorAll('.vocab-grid .word-item');
-var synth=window.speechSynthesis;
-vocabItems.forEach(function(el){
-  el.addEventListener('click',function(){
-    var word=el.dataset.en;
-    if(!word||!synth)return;
-    // Cancel any ongoing speech
-    if(synth.speaking)synth.cancel();
-    var utter=new SpeechSynthesisUtterance(word);
-    utter.lang='en-US';
-    utter.rate=0.85;
-    // Visual feedback
-    vocabItems.forEach(function(x){x.classList.remove('speaking');});
-    el.classList.add('speaking');
-    utter.onend=function(){el.classList.remove('speaking');};
-    utter.onerror=function(){el.classList.remove('speaking');};
-    synth.speak(utter);
-  });
-});
-// ─── Vocab toggle Chinese ───
-var toggleBtn=document.getElementById('vocabToggle');
-if(toggleBtn){
-  toggleBtn.addEventListener('click',function(){
-    var cns=document.querySelectorAll('.vocab-grid .word-item .cn');
-    var hidden=toggleBtn.textContent.indexOf('显示')>=0;
-    cns.forEach(function(cn){
-      if(hidden){
-        cn.classList.remove('hidden');
-        cn.style.visibility='visible';
-      }else{
-        cn.style.visibility='hidden';
-      }
-    });
-    toggleBtn.textContent=hidden?'🙈 隐藏中文':'👀 显示中文';
-  });
+
+// ───= Vocab Learning Engine =───
+var VOCAB = [{"en": "excuse", "def": "v. 原谅"}, {"en": "me", "def": "pron. 我（宾格）"}, {"en": "yes", "def": "adv. 是的"}, {"en": "is", "def": "v. be动词第三人称单数"}, {"en": "this", "def": "pron. 这"}, {"en": "your", "def": "poss. 你的；你们的"}, {"en": "handbag", "def": "n. （女用）手提包"}, {"en": "pardon", "def": "int. 原谅，请再说一遍"}, {"en": "thank you", "def": "感谢你（们）"}, {"en": "very much", "def": "非常地"}];
+var synth = window.speechSynthesis;
+
+function speakWord(word, cb){
+  if(!synth){if(cb)cb();return;}
+  if(synth.speaking)synth.cancel();
+  var u=new SpeechSynthesisUtterance(word);
+  u.lang='en-US';u.rate=0.85;
+  if(cb){u.onend=cb;u.onerror=cb;}
+  synth.speak(u);
 }
+
+// ─── Vocab Learning State ───
+var vstate = {
+  mode: 'fill',  // fill | dictation | choice | match | typing
+  index: 0,
+  score: {correct:0,wrong:0},
+  // For tracking wrong words
+  wrongWords: [],
+  // For matching
+  matched: [],
+  selectedEn: null,
+  // For current question
+  hintCount: 0,
+  answered: false,
+};
+
+var MODES = [
+  {id:'fill',label:'补全字母'},
+  {id:'dictation',label:'听写'},
+  {id:'choice',label:'选择'},
+  {id:'match',label:'配对'},
+  {id:'typing',label:'打字'},
+];
+
+// ─── Shuffle utility ───
+function shuffle(a){
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+// ─── Pick random wrong answers for multiple choice ───
+function pickChoices(correct, all, count){
+  var pool=all.filter(function(w){return w.en!==correct.en;});
+  shuffle(pool);
+  var choices=pool.slice(0,count-1).map(function(w){return w.en;});
+  choices.push(correct.en);
+  shuffle(choices);
+  return choices;
+}
+
+// ─── Fill missing letters ───
+function fillBlanks(word){
+  var len=word.length;
+  if(len<=2) return {display:word,blanks:[]};
+  var hideCount=Math.max(1,Math.floor(len*0.4));
+  var indices=[];
+  for(var i=0;i<len;i++){if(word[i]!=' ')indices.push(i);}
+  shuffle(indices);
+  var toHide=indices.slice(0,hideCount).sort(function(a,b){return a-b;});
+  var display='',blanks=[];
+  for(var i=0;i<len;i++){
+    if(toHide.indexOf(i)>=0){display+='_';blanks.push(i);}
+    else{display+=word[i];}
+  }
+  return {display:display,blanks:toHide};
+}
+
+// ─── Render vocab learning ───
+function renderVocab(){
+  var root=document.getElementById('vlearnRoot');
+  if(!root)return;
+  var m=vstate.mode;
+  var total=VOCAB.length;
+
+  // Mode buttons
+  var html='<div class="vlearn-modes">';
+  MODES.forEach(function(mode){
+    html+='<button class="vlearn-mode-btn'+(mode.id===m?' active':'')+'" data-mode="'+mode.id+'">'+mode.label+'</button>';
+  });
+  html+='</div>';
+
+  // Progress
+  var done=vstate.index;
+  html+='<div class="vlearn-progress">'+done+'/'+total+' 完成 | 答对 '+vstate.score.correct+' 答错 '+vstate.score.wrong+'</div>';
+
+  html+='<div class="vlearn-card" id="vlearnCard">';
+
+  if(done>=total){
+    // Show score
+    var pct=total>0?Math.round(vstate.score.correct/total*100):0;
+    html+='<div class="vlearn-score show"><h3>🎉 学习完成！</h3>';
+    html+='<div class="stat">'+vstate.score.correct+'/'+total+'</div>';
+    html+='<div style="font-size:14px;color:#999;margin-top:4px">正确率 '+pct+'%</div>';
+    if(vstate.wrongWords.length>0){
+      html+='<div style="margin-top:10px;font-size:13px;color:#e74c3c">需要复习：';
+      vstate.wrongWords.forEach(function(w){html+=escHtml(w.en)+' ';});
+      html+='</div>';
+    }
+    html+='<button class="vlearn-btn vlearn-btn-check" style="margin-top:12px" id="vlearnReset">🔄 重新学习</button>';
+    html+='</div>';
+  }else{
+    var word=VOCAB[vstate.index];
+    html+=renderQuestion(m,word,total);
+  }
+
+  html+='</div></div>';
+  root.innerHTML=html;
+
+  // Bind events
+  bindEvents();
+}
+
+function escHtml(s){
+  var d=document.createElement('div');
+  d.appendChild(document.createTextNode(s));
+  return d.innerHTML;
+}
+
+function renderQuestion(mode, word, total){
+  var html='';
+  // Progress indicator within card
+  html+='<div style="font-size:12px;color:#bbb;margin-bottom:8px">'+(vstate.index+1)+'/'+total+'</div>';
+
+  if(mode==='fill'){
+    var fb=fillBlanks(word.en);
+    html+='<div class="vlearn-chinese">'+escHtml(word.def)+'</div>';
+    html+='<div class="vlearn-word">';
+    for(var i=0;i<fb.display.length;i++){
+      html+=fb.display[i]==='_'?'<span class="blank">_</span>':'<span class="shown">'+fb.display[i]+'</span>';
+    }
+    html+='</div>';
+    html+='<div class="vlearn-input-wrap">';
+    html+='<input class="vlearn-input" id="vlearnInput" type="text" placeholder="输入完整单词..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
+    html+='<button class="vlearn-btn vlearn-btn-check" id="vlearnCheck">确认</button>';
+    html+='<button class="vlearn-btn vlearn-btn-hint" id="vlearnHint">💡 提示</button>';
+    html+='<button class="vlearn-btn vlearn-btn-skip" id="vlearnSkip">跳过→</button>';
+    html+='</div>';
+    html+='<div class="vlearn-feedback" id="vlearnFb"></div>';
+  }else if(mode==='dictation'){
+    html+='<div style="text-align:center;margin-bottom:12px"><button class="vlearn-btn-play" id="vlearnPlay">🔊 播放读音</button></div>';
+    html+='<div class="vlearn-input-wrap">';
+    html+='<input class="vlearn-input" id="vlearnInput" type="text" placeholder="输入你听到的单词..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
+    html+='<button class="vlearn-btn vlearn-btn-check" id="vlearnCheck">确认</button>';
+    html+='<button class="vlearn-btn vlearn-btn-play" id="vlearnReplay">🔊 再听一遍</button>';
+    html+='<button class="vlearn-btn vlearn-btn-skip" id="vlearnSkip">跳过→</button>';
+    html+='</div>';
+    html+='<div class="vlearn-feedback" id="vlearnFb"></div>';
+  }else if(mode==='choice'){
+    var word=VOCAB[vstate.index];
+    var choices=pickChoices(word,VOCAB,4);
+    html+='<div class="vlearn-chinese">'+escHtml(word.def)+'</div>';
+    html+='<div style="text-align:center;font-size:13px;color:#999;margin-bottom:4px">请选择对应的英文单词</div>';
+    html+='<div class="vlearn-choices">';
+    choices.forEach(function(c){
+      html+='<div class="vlearn-choice" data-word="'+escHtml(c)+'">'+escHtml(c)+'</div>';
+    });
+    html+='</div>';
+    html+='<div class="vlearn-feedback" id="vlearnFb"></div>';
+    html+='<button class="vlearn-btn vlearn-btn-skip" id="vlearnSkip" style="margin-top:8px;width:100%">跳过→</button>';
+  }else if(mode==='match'){
+    // Show remaining pairs
+    var remaining=[];
+    for(var i=0;i<VOCAB.length;i++){
+      if(vstate.matched.indexOf(i)<0)remaining.push(VOCAB[i]);
+    }
+    if(remaining.length===0){
+      html+='<div style="text-align:center;padding:20px">🎉 全部配对完成！</div>';
+      html+='<button class="vlearn-btn vlearn-btn-check" style="width:100%;margin-top:8px" id="vlearnNextMode">完成</button>';
+    }else{
+      var enList=remaining.map(function(w){return w.en;});
+      var cnList=remaining.map(function(w){return w.def;});
+      shuffle(enList);shuffle(cnList);
+      html+='<div style="text-align:center;font-size:13px;color:#999;margin-bottom:8px">点击英文 → 点击对应的中文翻译</div>';
+      html+='<div class="vlearn-match-wrap">';
+      html+='<div class="vlearn-match-col" id="matchEn">';
+      enList.forEach(function(e){
+        html+='<div class="vlearn-match-item" data-lang="en" data-word="'+escHtml(e)+'">'+escHtml(e)+'</div>';
+      });
+      html+='</div>';
+      html+='<div class="vlearn-match-col" id="matchCn">';
+      cnList.forEach(function(c){
+        html+='<div class="vlearn-match-item" data-lang="cn" data-word="'+escHtml(c)+'">'+escHtml(c)+'</div>';
+      });
+      html+='</div>';
+      html+='</div>';
+    }
+  }else if(mode==='typing'){
+    html+='<div class="vlearn-chinese">'+escHtml(word.def)+'</div>';
+    html+='<div style="text-align:center;font-size:13px;color:#999;margin-bottom:8px">输入对应的英文单词</div>';
+    html+='<div class="vlearn-input-wrap">';
+    html+='<input class="vlearn-input" id="vlearnInput" type="text" placeholder="输入英文单词..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
+    html+='<button class="vlearn-btn vlearn-btn-check" id="vlearnCheck">确认</button>';
+    html+='<button class="vlearn-btn vlearn-btn-hint" id="vlearnHint">💡 提示</button>';
+    html+='<button class="vlearn-btn vlearn-btn-skip" id="vlearnSkip">跳过→</button>';
+    html+='</div>';
+    html+='<div class="vlearn-feedback" id="vlearnFb"></div>';
+  }
+  return html;
+}
+
+// ─── Bind events for current mode ───
+function bindEvents(){
+  // Mode buttons
+  document.querySelectorAll('.vlearn-mode-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      vstate.mode=this.dataset.mode;
+      vstate.index=0;
+      vstate.matched=[];
+      vstate.selectedEn=null;
+      vstate.score={correct:0,wrong:0};
+      vstate.wrongWords=[];
+      renderVocab();
+    });
+  });
+
+  // Reset
+  var resetBtn=document.getElementById('vlearnReset');
+  if(resetBtn){
+    resetBtn.addEventListener('click',function(){
+      vstate.index=0;
+      vstate.matched=[];
+      vstate.selectedEn=null;
+      vstate.score={correct:0,wrong:0};
+      vstate.wrongWords=[];
+      renderVocab();
+    });
+  }
+
+  var mode=vstate.mode;
+  var word=VOCAB[vstate.index];
+
+  // Skip
+  var skipBtn=document.getElementById('vlearnSkip');
+  if(skipBtn){
+    skipBtn.addEventListener('click',function(){
+      vstate.score.wrong++;
+      vstate.wrongWords.push(word);
+      vstate.index++;
+      renderVocab();
+    });
+  }
+
+  // Check (for fill, dictation, typing)
+  var checkBtn=document.getElementById('vlearnCheck');
+  var input=document.getElementById('vlearnInput');
+  if(checkBtn&&input){
+    function doCheck(){
+      if(vstate.answered){vstate.index++;renderVocab();return;}
+      var val=input.value.trim().toLowerCase().replace(/[^a-zA-Z\s-]/g,'');
+      var correct=word.en.toLowerCase();
+      if(val===correct){
+        vstate.score.correct++;
+        vstate.answered=true;
+        input.classList.add('correct');
+        input.disabled=true;
+        var fb=document.getElementById('vlearnFb');
+        if(fb){fb.textContent='✅ 正确！ '+escHtml(word.en);fb.className='vlearn-feedback show ok';}
+        checkBtn.textContent='下一题 →';
+        speakWord(word.en);
+      }else{
+        vstate.score.wrong++;
+        input.classList.add('wrong');
+        var fb=document.getElementById('vlearnFb');
+        if(fb){fb.textContent='❌ 正确是：'+escHtml(word.en);fb.className='vlearn-feedback show fail';}
+        input.value=correct;
+        input.classList.remove('wrong');
+        input.classList.add('correct');
+        input.disabled=true;
+        vstate.wrongWords.push(word);
+        vstate.answered=true;
+        checkBtn.textContent='下一题 →';
+        speakWord(word.en);
+      }
+    }
+    checkBtn.addEventListener('click',doCheck);
+    input.addEventListener('keydown',function(e){if(e.key==='Enter')doCheck();});
+  }
+
+  // Hint (for fill, typing)
+  var hintBtn=document.getElementById('vlearnHint');
+  if(hintBtn&&input){
+    hintBtn.addEventListener('click',function(){
+      var correct=word.en;
+      var revealed=0;
+      for(var i=0;i<correct.length;i++){
+        if(input.value.length<=i||input.value[i].toLowerCase()!==correct[i].toLowerCase()){
+          input.value=correct.substring(0,i+1);
+          revealed++;
+          if(revealed>=2)break;
+        }
+      }
+      input.focus();
+    });
+  }
+
+  // Play/Replay for dictation
+  var playBtn=document.getElementById('vlearnPlay');
+  if(playBtn){
+    playBtn.addEventListener('click',function(){speakWord(word.en);});
+    // Auto play on load
+    setTimeout(function(){speakWord(word.en);},300);
+  }
+  var replayBtn=document.getElementById('vlearnReplay');
+  if(replayBtn){
+    replayBtn.addEventListener('click',function(){speakWord(word.en);});
+  }
+
+  // Choice mode
+  if(mode==='choice'){
+    document.querySelectorAll('.vlearn-choice').forEach(function(el){
+      el.addEventListener('click',function(){
+        if(vstate.answered){vstate.index++;renderVocab();return;}
+        var selected=this.dataset.word;
+        var correct=word.en;
+        document.querySelectorAll('.vlearn-choice').forEach(function(x){x.style.pointerEvents='none';});
+        if(selected===correct){
+          this.classList.add('correct');
+          vstate.score.correct++;
+          vstate.answered=true;
+          var fb=document.getElementById('vlearnFb');
+          if(fb){fb.textContent='✅ 正确！ '+escHtml(word.en);fb.className='vlearn-feedback show ok';}
+          speakWord(word.en);
+          var skip=document.getElementById('vlearnSkip');
+          if(skip)skip.textContent='下一题 →';
+        }else{
+          this.classList.add('wrong');
+          vstate.score.wrong++;
+          vstate.wrongWords.push(word);
+          // Highlight correct one
+          document.querySelectorAll('.vlearn-choice').forEach(function(x){
+            if(x.dataset.word===correct){x.classList.add('correct');}
+          });
+          vstate.answered=true;
+          var fb=document.getElementById('vlearnFb');
+          if(fb){fb.textContent='❌ 正确是：'+escHtml(word.en);fb.className='vlearn-feedback show fail';}
+          speakWord(word.en);
+          var skip=document.getElementById('vlearnSkip');
+          if(skip)skip.textContent='下一题 →';
+        }
+      });
+    });
+  }
+
+  // Match mode
+  if(mode==='match'){
+    document.querySelectorAll('.vlearn-match-item').forEach(function(el){
+      el.addEventListener('click',function(){
+        if(this.classList.contains('matched'))return;
+        var lang=this.dataset.lang;
+        if(lang==='en'){
+          document.querySelectorAll('.vlearn-match-item.selected').forEach(function(x){if(x.dataset.lang==='en')x.classList.remove('selected');});
+          this.classList.toggle('selected');
+        }else{
+          var enSel=document.querySelector('.vlearn-match-item.selected[data-lang="en"]');
+          if(!enSel)return;
+          var enWord=enSel.dataset.word;
+          var cnWord=this.dataset.word;
+          // Find if they match
+          var matched=false;
+          for(var i=0;i<VOCAB.length;i++){
+            if(VOCAB[i].en===enWord&&VOCAB[i].def===cnWord&&vstate.matched.indexOf(i)<0){
+              matched=true;
+              vstate.matched.push(i);
+              enSel.classList.remove('selected');
+              enSel.classList.add('matched');
+              this.classList.add('matched');
+              speakWord(VOCAB[i].en);
+              break;
+            }
+          }
+          if(!matched){
+            enSel.classList.remove('selected');
+            enSel.classList.add('wrong');
+            this.classList.add('wrong');
+            var _this=this;
+            setTimeout(function(){enSel.classList.remove('wrong');_this.classList.remove('wrong');},500);
+          }
+          // Check if all done
+          if(vstate.matched.length===VOCAB.length){
+            renderVocab();
+          }
+        }
+      });
+    });
+  }
+
+  // Next mode from match completion
+  var nextModeBtn=document.getElementById('vlearnNextMode');
+  if(nextModeBtn){
+    nextModeBtn.addEventListener('click',function(){
+      vstate.index=0;
+      vstate.matched=[];
+      renderVocab();
+    });
+  }
+}
+
+// ─── Init ───
+renderVocab();
 })();
 </script>
 </body>
