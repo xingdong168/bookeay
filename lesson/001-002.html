@@ -356,6 +356,7 @@ function bindEvents(){
     btn.addEventListener('click',function(){
       vstate.mode=this.dataset.mode;
       vstate.index=0;
+      vstate.answered=false;
       vstate.matched=[];
       vstate.selectedEn=null;
       vstate.score={correct:0,wrong:0};
@@ -369,6 +370,7 @@ function bindEvents(){
   if(resetBtn){
     resetBtn.addEventListener('click',function(){
       vstate.index=0;
+      vstate.answered=false;
       vstate.matched=[];
       vstate.selectedEn=null;
       vstate.score={correct:0,wrong:0};
@@ -384,6 +386,7 @@ function bindEvents(){
   var skipBtn=document.getElementById('vlearnSkip');
   if(skipBtn){
     skipBtn.addEventListener('click',function(){
+      vstate.answered=false;
       vstate.score.wrong++;
       vstate.wrongWords.push(word);
       vstate.index++;
@@ -396,7 +399,7 @@ function bindEvents(){
   var input=document.getElementById('vlearnInput');
   if(checkBtn&&input){
     function doCheck(){
-      if(vstate.answered){vstate.index++;renderVocab();return;}
+      if(vstate.answered){vstate.answered=false;vstate.index++;renderVocab();return;}
       var val=input.value.trim().toLowerCase().replace(/[^a-zA-Z\s-]/g,'');
       var correct=word.en.toLowerCase();
       if(val===correct){
