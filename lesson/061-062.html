@@ -20,6 +20,7 @@
       <div class="lesson-num">第 061-062 课</div>
       <div class="lesson-title">A Bad Cold重感冒</div>
     </div>
+    <audio id="lessonAudio" preload="metadata" style="display:none"></audio>
     <button class="play-btn" id="playBtn" title="播放/暂停">▶</button>
     <div class="audio-track" id="track">
       <div class="audio-fill" id="fill"></div>
@@ -122,17 +123,17 @@
       <div class="info-section">
         <div class="section-title">📝 单词</div>
         <div class="vocab-grid">
-<div class="word-item"><span class="en">feel</span><span class="pos">v</span><span class="cn">v. 感觉</span></div>
-<div class="word-item"><span class="en">look</span><span class="pos">v</span><span class="cn">v. 看（起来） must modal verb 必须</span></div>
-<div class="word-item"><span class="en">call</span><span class="pos">v</span><span class="cn">v. 叫，请</span></div>
-<div class="word-item"><span class="en">doctor</span><span class="pos">n</span><span class="cn">n. 医生</span></div>
-<div class="word-item"><span class="en">telephone</span><span class="pos">n</span><span class="cn">n. 电话</span></div>
-<div class="word-item"><span class="en">remember</span><span class="pos">v</span><span class="cn">v. 记得，记住</span></div>
-<div class="word-item"><span class="en">mouth</span><span class="pos">n</span><span class="cn">n. 嘴</span></div>
-<div class="word-item"><span class="en">tongue</span><span class="pos">n</span><span class="cn">n. 舌头</span></div>
-<div class="word-item"><span class="en">bad</span><span class="pos">adj</span><span class="cn">adj. 坏的，严重的</span></div>
-<div class="word-item"><span class="en">cold</span><span class="pos">n</span><span class="cn">n. 感冒</span></div>
-<div class="word-item"><span class="en">news</span><span class="pos">n</span><span class="cn">n. 消息</span></div>
+<div class="word-item"><span class="en">feel</span><span class="pos">v</span><span class="cn">感觉</span></div>
+<div class="word-item"><span class="en">look</span><span class="pos">v</span><span class="cn">看（起来） must modal verb 必须</span></div>
+<div class="word-item"><span class="en">call</span><span class="pos">v</span><span class="cn">叫，请</span></div>
+<div class="word-item"><span class="en">doctor</span><span class="pos">n</span><span class="cn">医生</span></div>
+<div class="word-item"><span class="en">telephone</span><span class="pos">n</span><span class="cn">电话</span></div>
+<div class="word-item"><span class="en">remember</span><span class="pos">v</span><span class="cn">记得，记住</span></div>
+<div class="word-item"><span class="en">mouth</span><span class="pos">n</span><span class="cn">嘴</span></div>
+<div class="word-item"><span class="en">tongue</span><span class="pos">n</span><span class="cn">舌头</span></div>
+<div class="word-item"><span class="en">bad</span><span class="pos">adj</span><span class="cn">坏的，严重的</span></div>
+<div class="word-item"><span class="en">cold</span><span class="pos">n</span><span class="cn">感冒</span></div>
+<div class="word-item"><span class="en">news</span><span class="pos">n</span><span class="cn">消息</span></div>
 </div>
 
       </div>
@@ -153,33 +154,49 @@
 
 <script>
 (function(){
-var au=new Audio('https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/061%26062%EF%BC%8DA%20Bad%20Cold.mp3');
+var au=document.getElementById('lessonAudio');
+// Use CORS-friendly approach: set src after page load
+au.src='https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/061%26062%EF%BC%8DA%20Bad%20Cold.mp3';
+au.load();
 var pl=document.getElementById('playBtn');
 var fl=document.getElementById('fill');
 var ct=document.getElementById('curTime');
 var tr=document.getElementById('track');
+var playing=false;
 pl.addEventListener('click',function(){
-  if(au.paused||au.ended){au.play();pl.textContent='⏸';pl.classList.add('on');}
+  if(au.paused||au.ended){au.play().then(function(){pl.textContent='⏸';pl.classList.add('on');}).catch(function(e){console.log('Play error:',e);});}
   else{au.pause();pl.textContent='▶';pl.classList.remove('on');}
 });
-function sk(e){
-  if(!au.duration)return;
-  var r=tr.getBoundingClientRect();
-  au.currentTime=((e.clientX-r.left)/r.width)*au.duration;
-  if(au.paused){au.play();pl.textContent='⏸';pl.classList.add('on');}
-}
-function fm(t){var m=Math.floor(t/60),s=Math.floor(t%60);return m+':'+(s<10?'0':'')+s;}
 au.addEventListener('timeupdate',function(){
-  if(au.duration){fl.style.width=(au.currentTime/au.duration*100)+'%';ct.textContent=fm(au.currentTime);}
+  if(au.duration&&au.duration!==Infinity&&au.duration>0){
+    fl.style.width=Math.min(100,(au.currentTime/au.duration*100))+'%';
+    var m=Math.floor(au.currentTime/60),s=Math.floor(au.currentTime%60);
+    ct.textContent=m+':'+(s<10?'0':'')+s;
+  }
 });
 au.addEventListener('ended',function(){pl.textContent='▶';pl.classList.remove('on');});
-tr.addEventListener('click',sk);
+au.addEventListener('loadedmetadata',function(){
+  if(au.duration&&au.duration!==Infinity){
+    var m=Math.floor(au.duration/60),s=Math.floor(au.duration%60);
+    ct.textContent=m+':'+(s<10?'0':'')+s;
+  }
+});
+tr.addEventListener('click',function(e){
+  if(!au.duration||au.duration===Infinity||au.duration<=0)return;
+  var r=tr.getBoundingClientRect();
+  var pct=(e.clientX-r.left)/r.width;
+  au.currentTime=pct*au.duration;
+  au.play().then(function(){pl.textContent='⏸';pl.classList.add('on');}).catch(function(){});
+});
 // Click sentence: seek to exact start time and play
 document.querySelectorAll('.sentence-item').forEach(function(el){
   el.addEventListener('click',function(e){
     e.preventDefault();
     var start=parseFloat(el.dataset.start);
-    if(!isNaN(start)&&au.duration){au.currentTime=start;au.play();pl.textContent='⏸';pl.classList.add('on');}
+    if(!isNaN(start)&&au.duration&&au.duration!==Infinity&&au.duration>0){
+      au.currentTime=start;
+      au.play().then(function(){pl.textContent='⏸';pl.classList.add('on');}).catch(function(){});
+    }
     document.querySelectorAll('.sentence-item').forEach(function(x){x.classList.remove('s-target');});
     el.classList.add('s-target');
     el.scrollIntoView({block:'nearest',behavior:'smooth'});
@@ -195,6 +212,16 @@ document.addEventListener('keydown',function(e){
   if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();if(idx<items.length-1) items[idx+1].click();}
   else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();if(idx>0) items[idx-1].click();}
   else if(e.key===' '||e.key==='Space'){e.preventDefault();pl.click();}
+});
+// Show native controls as fallback if JS can't access audio properties
+au.addEventListener('error',function(){
+  pl.textContent='⚠️';
+  pl.title='音频加载失败，可能因跨域限制';
+  // Show native audio controls as fallback
+  au.style.display='block';
+  au.setAttribute('controls','');
+  au.style.width='100%';
+  au.style.margin='4px 0';
 });
 })();
 </script>

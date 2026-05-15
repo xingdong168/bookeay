@@ -20,6 +20,7 @@
       <div class="lesson-num">第 051-052 课</div>
       <div class="lesson-title">A pleasant climate宜人的气候</div>
     </div>
+    <audio id="lessonAudio" preload="metadata" style="display:none"></audio>
     <button class="play-btn" id="playBtn" title="播放/暂停">▶</button>
     <div class="audio-track" id="track">
       <div class="audio-fill" id="fill"></div>
@@ -110,32 +111,32 @@
       <div class="info-section">
         <div class="section-title">📝 单词</div>
         <div class="vocab-grid">
-<div class="word-item"><span class="en">Greece</span><span class="pos">n</span><span class="cn">n. 希腊</span></div>
-<div class="word-item"><span class="en">climate</span><span class="pos">n</span><span class="cn">n. 气候</span></div>
-<div class="word-item"><span class="en">country</span><span class="pos">n</span><span class="cn">n. 国家</span></div>
-<div class="word-item"><span class="en">pleasant</span><span class="pos">adj</span><span class="cn">adj. 宜人的</span></div>
-<div class="word-item"><span class="en">weather</span><span class="pos">n</span><span class="cn">n. 天气</span></div>
-<div class="word-item"><span class="en">spring</span><span class="pos">n</span><span class="cn">n. 春季</span></div>
-<div class="word-item"><span class="en">windy</span><span class="pos">adj</span><span class="cn">adj. 有风的</span></div>
-<div class="word-item"><span class="en">warm</span><span class="pos">adj</span><span class="cn">adj. 温暖的</span></div>
-<div class="word-item"><span class="en">rain</span><span class="pos">v</span><span class="cn">v. 下雨</span></div>
-<div class="word-item"><span class="en">sometimes</span><span class="pos">adv</span><span class="cn">adv. 有时</span></div>
-<div class="word-item"><span class="en">summer</span><span class="pos">n</span><span class="cn">n. 夏天</span></div>
-<div class="word-item"><span class="en">autumn</span><span class="pos">n</span><span class="cn">n. 秋天</span></div>
-<div class="word-item"><span class="en">winter</span><span class="pos">n</span><span class="cn">n. 冬天</span></div>
-<div class="word-item"><span class="en">snow</span><span class="pos">v</span><span class="cn">v. 下雪</span></div>
-<div class="word-item"><span class="en">January</span><span class="pos">n</span><span class="cn">n. 1月</span></div>
-<div class="word-item"><span class="en">February</span><span class="pos">n</span><span class="cn">n. 2月</span></div>
-<div class="word-item"><span class="en">March</span><span class="pos">n</span><span class="cn">n. 3月</span></div>
-<div class="word-item"><span class="en">April</span><span class="pos">n</span><span class="cn">n. 4月</span></div>
-<div class="word-item"><span class="en">May</span><span class="pos">n</span><span class="cn">n. 5月</span></div>
-<div class="word-item"><span class="en">June</span><span class="pos">n</span><span class="cn">n. 6月</span></div>
-<div class="word-item"><span class="en">July</span><span class="pos">n</span><span class="cn">n. 7月</span></div>
-<div class="word-item"><span class="en">August</span><span class="pos">n</span><span class="cn">n. 8月</span></div>
-<div class="word-item"><span class="en">September</span><span class="pos">n</span><span class="cn">n. 9月</span></div>
-<div class="word-item"><span class="en">October</span><span class="pos">n</span><span class="cn">n. 10月</span></div>
-<div class="word-item"><span class="en">November</span><span class="pos">n</span><span class="cn">n. 11月</span></div>
-<div class="word-item"><span class="en">December</span><span class="pos">n</span><span class="cn">n. 12月</span></div>
+<div class="word-item"><span class="en">Greece</span><span class="pos">n</span><span class="cn">希腊</span></div>
+<div class="word-item"><span class="en">climate</span><span class="pos">n</span><span class="cn">气候</span></div>
+<div class="word-item"><span class="en">country</span><span class="pos">n</span><span class="cn">国家</span></div>
+<div class="word-item"><span class="en">pleasant</span><span class="pos">adj</span><span class="cn">宜人的</span></div>
+<div class="word-item"><span class="en">weather</span><span class="pos">n</span><span class="cn">天气</span></div>
+<div class="word-item"><span class="en">spring</span><span class="pos">n</span><span class="cn">春季</span></div>
+<div class="word-item"><span class="en">windy</span><span class="pos">adj</span><span class="cn">有风的</span></div>
+<div class="word-item"><span class="en">warm</span><span class="pos">adj</span><span class="cn">温暖的</span></div>
+<div class="word-item"><span class="en">rain</span><span class="pos">v</span><span class="cn">下雨</span></div>
+<div class="word-item"><span class="en">sometimes</span><span class="pos">adv</span><span class="cn">有时</span></div>
+<div class="word-item"><span class="en">summer</span><span class="pos">n</span><span class="cn">夏天</span></div>
+<div class="word-item"><span class="en">autumn</span><span class="pos">n</span><span class="cn">秋天</span></div>
+<div class="word-item"><span class="en">winter</span><span class="pos">n</span><span class="cn">冬天</span></div>
+<div class="word-item"><span class="en">snow</span><span class="pos">v</span><span class="cn">下雪</span></div>
+<div class="word-item"><span class="en">January</span><span class="pos">n</span><span class="cn">1月</span></div>
+<div class="word-item"><span class="en">February</span><span class="pos">n</span><span class="cn">2月</span></div>
+<div class="word-item"><span class="en">March</span><span class="pos">n</span><span class="cn">3月</span></div>
+<div class="word-item"><span class="en">April</span><span class="pos">n</span><span class="cn">4月</span></div>
+<div class="word-item"><span class="en">May</span><span class="pos">n</span><span class="cn">5月</span></div>
+<div class="word-item"><span class="en">June</span><span class="pos">n</span><span class="cn">6月</span></div>
+<div class="word-item"><span class="en">July</span><span class="pos">n</span><span class="cn">7月</span></div>
+<div class="word-item"><span class="en">August</span><span class="pos">n</span><span class="cn">8月</span></div>
+<div class="word-item"><span class="en">September</span><span class="pos">n</span><span class="cn">9月</span></div>
+<div class="word-item"><span class="en">October</span><span class="pos">n</span><span class="cn">10月</span></div>
+<div class="word-item"><span class="en">November</span><span class="pos">n</span><span class="cn">11月</span></div>
+<div class="word-item"><span class="en">December</span><span class="pos">n</span><span class="cn">12月</span></div>
 </div>
 
       </div>
@@ -156,33 +157,49 @@
 
 <script>
 (function(){
-var au=new Audio('https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/051%26052%EF%BC%8DA%20Pleasant%20Climate.mp3');
+var au=document.getElementById('lessonAudio');
+// Use CORS-friendly approach: set src after page load
+au.src='https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/051%26052%EF%BC%8DA%20Pleasant%20Climate.mp3';
+au.load();
 var pl=document.getElementById('playBtn');
 var fl=document.getElementById('fill');
 var ct=document.getElementById('curTime');
 var tr=document.getElementById('track');
+var playing=false;
 pl.addEventListener('click',function(){
-  if(au.paused||au.ended){au.play();pl.textContent='⏸';pl.classList.add('on');}
+  if(au.paused||au.ended){au.play().then(function(){pl.textContent='⏸';pl.classList.add('on');}).catch(function(e){console.log('Play error:',e);});}
   else{au.pause();pl.textContent='▶';pl.classList.remove('on');}
 });
-function sk(e){
-  if(!au.duration)return;
-  var r=tr.getBoundingClientRect();
-  au.currentTime=((e.clientX-r.left)/r.width)*au.duration;
-  if(au.paused){au.play();pl.textContent='⏸';pl.classList.add('on');}
-}
-function fm(t){var m=Math.floor(t/60),s=Math.floor(t%60);return m+':'+(s<10?'0':'')+s;}
 au.addEventListener('timeupdate',function(){
-  if(au.duration){fl.style.width=(au.currentTime/au.duration*100)+'%';ct.textContent=fm(au.currentTime);}
+  if(au.duration&&au.duration!==Infinity&&au.duration>0){
+    fl.style.width=Math.min(100,(au.currentTime/au.duration*100))+'%';
+    var m=Math.floor(au.currentTime/60),s=Math.floor(au.currentTime%60);
+    ct.textContent=m+':'+(s<10?'0':'')+s;
+  }
 });
 au.addEventListener('ended',function(){pl.textContent='▶';pl.classList.remove('on');});
-tr.addEventListener('click',sk);
+au.addEventListener('loadedmetadata',function(){
+  if(au.duration&&au.duration!==Infinity){
+    var m=Math.floor(au.duration/60),s=Math.floor(au.duration%60);
+    ct.textContent=m+':'+(s<10?'0':'')+s;
+  }
+});
+tr.addEventListener('click',function(e){
+  if(!au.duration||au.duration===Infinity||au.duration<=0)return;
+  var r=tr.getBoundingClientRect();
+  var pct=(e.clientX-r.left)/r.width;
+  au.currentTime=pct*au.duration;
+  au.play().then(function(){pl.textContent='⏸';pl.classList.add('on');}).catch(function(){});
+});
 // Click sentence: seek to exact start time and play
 document.querySelectorAll('.sentence-item').forEach(function(el){
   el.addEventListener('click',function(e){
     e.preventDefault();
     var start=parseFloat(el.dataset.start);
-    if(!isNaN(start)&&au.duration){au.currentTime=start;au.play();pl.textContent='⏸';pl.classList.add('on');}
+    if(!isNaN(start)&&au.duration&&au.duration!==Infinity&&au.duration>0){
+      au.currentTime=start;
+      au.play().then(function(){pl.textContent='⏸';pl.classList.add('on');}).catch(function(){});
+    }
     document.querySelectorAll('.sentence-item').forEach(function(x){x.classList.remove('s-target');});
     el.classList.add('s-target');
     el.scrollIntoView({block:'nearest',behavior:'smooth'});
@@ -198,6 +215,16 @@ document.addEventListener('keydown',function(e){
   if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();if(idx<items.length-1) items[idx+1].click();}
   else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();if(idx>0) items[idx-1].click();}
   else if(e.key===' '||e.key==='Space'){e.preventDefault();pl.click();}
+});
+// Show native controls as fallback if JS can't access audio properties
+au.addEventListener('error',function(){
+  pl.textContent='⚠️';
+  pl.title='音频加载失败，可能因跨域限制';
+  // Show native audio controls as fallback
+  au.style.display='block';
+  au.setAttribute('controls','');
+  au.style.width='100%';
+  au.style.margin='4px 0';
 });
 })();
 </script>
