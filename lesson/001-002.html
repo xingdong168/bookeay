@@ -53,14 +53,6 @@
 .vlearn-match-item.matched{border-color:#27ae60;background:#eafaf1;cursor:default;opacity:.7}
 .vlearn-match-item.wrong{border-color:#e74c3c;background:#fdedec}
 
-/* Multiple choice */
-.vlearn-choices{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-.vlearn-choice{padding:10px 14px;border:2px solid #ddd;border-radius:8px;cursor:pointer;font-size:15px;text-align:center;transition:all .15s}
-.vlearn-choice:hover{border-color:#4a90d9}
-.vlearn-choice.selected{border-color:#4a90d9;background:#eef4ff}
-.vlearn-choice.correct{border-color:#27ae60;background:#eafaf1;color:#27ae60}
-.vlearn-choice.wrong{border-color:#e74c3c;background:#fdedec;color:#e74c3c}
-
 /* Score */
 .vlearn-score{margin-top:12px;padding:12px;background:#f8f9fa;border-radius:8px;text-align:center;display:none}
 .vlearn-score.show{display:block}
@@ -235,7 +227,7 @@ function speakWord(word, cb){
 
 // ─── Vocab Learning State ───
 var vstate = {
-  mode: 'fill',  // fill | dictation | choice | match | typing
+  mode: 'dictation',  // dictation | match
   index: 0,
   score: {correct:0,wrong:0},
   // For tracking wrong words
@@ -249,11 +241,8 @@ var vstate = {
 };
 
 var MODES = [
-  {id:'fill',label:'补全字母'},
   {id:'dictation',label:'听写'},
-  {id:'choice',label:'选择'},
   {id:'match',label:'配对'},
-  {id:'typing',label:'打字'},
 ];
 
 // ─── Shuffle utility ───
@@ -263,31 +252,6 @@ function shuffle(a){
 }
 
 // ─── Pick random wrong answers for multiple choice ───
-function pickChoices(correct, all, count){
-  var pool=all.filter(function(w){return w.en!==correct.en;});
-  shuffle(pool);
-  var choices=pool.slice(0,count-1).map(function(w){return w.en;});
-  choices.push(correct.en);
-  shuffle(choices);
-  return choices;
-}
-
-// ─── Fill missing letters ───
-function fillBlanks(word){
-  var len=word.length;
-  if(len<=2) return {display:word,blanks:[]};
-  var hideCount=Math.max(1,Math.floor(len*0.4));
-  var indices=[];
-  for(var i=0;i<len;i++){if(word[i]!=' ')indices.push(i);}
-  shuffle(indices);
-  var toHide=indices.slice(0,hideCount).sort(function(a,b){return a-b;});
-  var display='',blanks=[];
-  for(var i=0;i<len;i++){
-    if(toHide.indexOf(i)>=0){display+='_';blanks.push(i);}
-    else{display+=word[i];}
-  }
-  return {display:display,blanks:toHide};
-}
 
 // ─── Render vocab learning ───
 function renderVocab(){
@@ -345,22 +309,7 @@ function renderQuestion(mode, word, total){
   // Progress indicator within card
   html+='<div style="font-size:12px;color:#bbb;margin-bottom:8px">'+(vstate.index+1)+'/'+total+'</div>';
 
-  if(mode==='fill'){
-    var fb=fillBlanks(word.en);
-    html+='<div class="vlearn-chinese">'+escHtml(word.def)+'</div>';
-    html+='<div class="vlearn-word">';
-    for(var i=0;i<fb.display.length;i++){
-      html+=fb.display[i]==='_'?'<span class="blank">_</span>':'<span class="shown">'+fb.display[i]+'</span>';
-    }
-    html+='</div>';
-    html+='<div class="vlearn-input-wrap">';
-    html+='<input class="vlearn-input" id="vlearnInput" type="text" placeholder="输入完整单词..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
-    html+='<button class="vlearn-btn vlearn-btn-check" id="vlearnCheck">确认</button>';
-    html+='<button class="vlearn-btn vlearn-btn-hint" id="vlearnHint">💡 提示</button>';
-    html+='<button class="vlearn-btn vlearn-btn-skip" id="vlearnSkip">跳过→</button>';
-    html+='</div>';
-    html+='<div class="vlearn-feedback" id="vlearnFb"></div>';
-  }else if(mode==='dictation'){
+  if(mode==='dictation'){
     html+='<div style="text-align:center;margin-bottom:12px"><button class="vlearn-btn-play" id="vlearnPlay">🔊 播放读音</button></div>';
     html+='<div class="vlearn-input-wrap">';
     html+='<input class="vlearn-input" id="vlearnInput" type="text" placeholder="输入你听到的单词..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
@@ -369,18 +318,6 @@ function renderQuestion(mode, word, total){
     html+='<button class="vlearn-btn vlearn-btn-skip" id="vlearnSkip">跳过→</button>';
     html+='</div>';
     html+='<div class="vlearn-feedback" id="vlearnFb"></div>';
-  }else if(mode==='choice'){
-    var word=VOCAB[vstate.index];
-    var choices=pickChoices(word,VOCAB,4);
-    html+='<div class="vlearn-chinese">'+escHtml(word.def)+'</div>';
-    html+='<div style="text-align:center;font-size:13px;color:#999;margin-bottom:4px">请选择对应的英文单词</div>';
-    html+='<div class="vlearn-choices">';
-    choices.forEach(function(c){
-      html+='<div class="vlearn-choice" data-word="'+escHtml(c)+'">'+escHtml(c)+'</div>';
-    });
-    html+='</div>';
-    html+='<div class="vlearn-feedback" id="vlearnFb"></div>';
-    html+='<button class="vlearn-btn vlearn-btn-skip" id="vlearnSkip" style="margin-top:8px;width:100%">跳过→</button>';
   }else if(mode==='match'){
     // Show remaining pairs
     var remaining=[];
@@ -408,16 +345,6 @@ function renderQuestion(mode, word, total){
       html+='</div>';
       html+='</div>';
     }
-  }else if(mode==='typing'){
-    html+='<div class="vlearn-chinese">'+escHtml(word.def)+'</div>';
-    html+='<div style="text-align:center;font-size:13px;color:#999;margin-bottom:8px">输入对应的英文单词</div>';
-    html+='<div class="vlearn-input-wrap">';
-    html+='<input class="vlearn-input" id="vlearnInput" type="text" placeholder="输入英文单词..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
-    html+='<button class="vlearn-btn vlearn-btn-check" id="vlearnCheck">确认</button>';
-    html+='<button class="vlearn-btn vlearn-btn-hint" id="vlearnHint">💡 提示</button>';
-    html+='<button class="vlearn-btn vlearn-btn-skip" id="vlearnSkip">跳过→</button>';
-    html+='</div>';
-    html+='<div class="vlearn-feedback" id="vlearnFb"></div>';
   }
   return html;
 }
@@ -464,7 +391,7 @@ function bindEvents(){
     });
   }
 
-  // Check (for fill, dictation, typing)
+  // Check (for dictation)
   var checkBtn=document.getElementById('vlearnCheck');
   var input=document.getElementById('vlearnInput');
   if(checkBtn&&input){
@@ -500,23 +427,6 @@ function bindEvents(){
     input.addEventListener('keydown',function(e){if(e.key==='Enter')doCheck();});
   }
 
-  // Hint (for fill, typing)
-  var hintBtn=document.getElementById('vlearnHint');
-  if(hintBtn&&input){
-    hintBtn.addEventListener('click',function(){
-      var correct=word.en;
-      var revealed=0;
-      for(var i=0;i<correct.length;i++){
-        if(input.value.length<=i||input.value[i].toLowerCase()!==correct[i].toLowerCase()){
-          input.value=correct.substring(0,i+1);
-          revealed++;
-          if(revealed>=2)break;
-        }
-      }
-      input.focus();
-    });
-  }
-
   // Play/Replay for dictation
   var playBtn=document.getElementById('vlearnPlay');
   if(playBtn){
@@ -530,41 +440,6 @@ function bindEvents(){
   }
 
   // Choice mode
-  if(mode==='choice'){
-    document.querySelectorAll('.vlearn-choice').forEach(function(el){
-      el.addEventListener('click',function(){
-        if(vstate.answered){vstate.index++;renderVocab();return;}
-        var selected=this.dataset.word;
-        var correct=word.en;
-        document.querySelectorAll('.vlearn-choice').forEach(function(x){x.style.pointerEvents='none';});
-        if(selected===correct){
-          this.classList.add('correct');
-          vstate.score.correct++;
-          vstate.answered=true;
-          var fb=document.getElementById('vlearnFb');
-          if(fb){fb.textContent='✅ 正确！ '+escHtml(word.en);fb.className='vlearn-feedback show ok';}
-          speakWord(word.en);
-          var skip=document.getElementById('vlearnSkip');
-          if(skip)skip.textContent='下一题 →';
-        }else{
-          this.classList.add('wrong');
-          vstate.score.wrong++;
-          vstate.wrongWords.push(word);
-          // Highlight correct one
-          document.querySelectorAll('.vlearn-choice').forEach(function(x){
-            if(x.dataset.word===correct){x.classList.add('correct');}
-          });
-          vstate.answered=true;
-          var fb=document.getElementById('vlearnFb');
-          if(fb){fb.textContent='❌ 正确是：'+escHtml(word.en);fb.className='vlearn-feedback show fail';}
-          speakWord(word.en);
-          var skip=document.getElementById('vlearnSkip');
-          if(skip)skip.textContent='下一题 →';
-        }
-      });
-    });
-  }
-
   // Match mode
   if(mode==='match'){
     document.querySelectorAll('.vlearn-match-item').forEach(function(el){
