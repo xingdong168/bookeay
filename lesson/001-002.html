@@ -11,6 +11,13 @@
 .trans-item:nth-child(odd){background:#f0f4ff}
 .trans-idx{font-size:11px;color:#999;font-weight:700;min-width:20px}
 .trans-text{font-size:15px;color:#333;line-height:1.6}
+.vocab-toolbar{margin-bottom:8px}
+.vocab-toggle{font-size:13px;padding:4px 12px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;color:#666}
+.vocab-toggle:hover{background:#f5f5f5}
+.vocab-grid .word-item{cursor:pointer;transition:background .15s}
+.vocab-grid .word-item:hover{background:#e8f0fe!important}
+.vocab-grid .word-item.speaking{background:#fff3cd!important}
+.vocab-grid .word-item .cn.hidden{visibility:hidden}
 </style>
 </head>
 <body>
@@ -87,17 +94,48 @@
       </div>
       <div class="info-section">
         <div class="section-title">📝 单词</div>
-        <div class="vocab-grid">
-<div class="word-item"><span class="en">excuse</span><span class="cn">v. 原谅</span></div>
-<div class="word-item"><span class="en">me</span><span class="cn">pron. 我（宾格）</span></div>
-<div class="word-item"><span class="en">yes</span><span class="cn">adv. 是的</span></div>
-<div class="word-item"><span class="en">is</span><span class="cn">v. be动词第三人称单数</span></div>
-<div class="word-item"><span class="en">this</span><span class="cn">pron. 这</span></div>
-<div class="word-item"><span class="en">your</span><span class="cn">possessive adj. 你的；你们的</span></div>
-<div class="word-item"><span class="en">handbag</span><span class="cn">n. （女用）手提包</span></div>
-<div class="word-item"><span class="en">pardon</span><span class="cn">int. 原谅，请再说一遍</span></div>
-<div class="word-item"><span class="en">thank you</span><span class="cn">感谢你（们）</span></div>
-<div class="word-item"><span class="en">very much</span><span class="cn">非常地</span></div>
+        <div class="vocab-toolbar"><button class="vocab-toggle" id="vocabToggle" title="隐藏中文自测">🙈 隐藏中文</button></div>
+<div class="vocab-grid" id="vocabGrid">
+<div class="word-item" data-en="excuse">
+  <span class="en">excuse</span>
+  <span class="cn">v. 原谅</span>
+</div>
+<div class="word-item" data-en="me">
+  <span class="en">me</span>
+  <span class="cn">pron. 我（宾格）</span>
+</div>
+<div class="word-item" data-en="yes">
+  <span class="en">yes</span>
+  <span class="cn">adv. 是的</span>
+</div>
+<div class="word-item" data-en="is">
+  <span class="en">is</span>
+  <span class="cn">v. be动词第三人称单数</span>
+</div>
+<div class="word-item" data-en="this">
+  <span class="en">this</span>
+  <span class="cn">pron. 这</span>
+</div>
+<div class="word-item" data-en="your">
+  <span class="en">your</span>
+  <span class="cn">possessive adj. 你的；你们的</span>
+</div>
+<div class="word-item" data-en="handbag">
+  <span class="en">handbag</span>
+  <span class="cn">n. （女用）手提包</span>
+</div>
+<div class="word-item" data-en="pardon">
+  <span class="en">pardon</span>
+  <span class="cn">int. 原谅，请再说一遍</span>
+</div>
+<div class="word-item" data-en="thank you">
+  <span class="en">thank you</span>
+  <span class="cn">感谢你（们）</span>
+</div>
+<div class="word-item" data-en="very much">
+  <span class="en">very much</span>
+  <span class="cn">非常地</span>
+</div>
 </div>
 
       </div>
@@ -174,6 +212,43 @@ au.addEventListener('error',function(){
   au.style.width='100%';
   au.style.margin='4px 0';
 });
+// ─── Vocab TTS ───
+var vocabItems=document.querySelectorAll('.vocab-grid .word-item');
+var synth=window.speechSynthesis;
+vocabItems.forEach(function(el){
+  el.addEventListener('click',function(){
+    var word=el.dataset.en;
+    if(!word||!synth)return;
+    // Cancel any ongoing speech
+    if(synth.speaking)synth.cancel();
+    var utter=new SpeechSynthesisUtterance(word);
+    utter.lang='en-US';
+    utter.rate=0.85;
+    // Visual feedback
+    vocabItems.forEach(function(x){x.classList.remove('speaking');});
+    el.classList.add('speaking');
+    utter.onend=function(){el.classList.remove('speaking');};
+    utter.onerror=function(){el.classList.remove('speaking');};
+    synth.speak(utter);
+  });
+});
+// ─── Vocab toggle Chinese ───
+var toggleBtn=document.getElementById('vocabToggle');
+if(toggleBtn){
+  toggleBtn.addEventListener('click',function(){
+    var cns=document.querySelectorAll('.vocab-grid .word-item .cn');
+    var hidden=toggleBtn.textContent.indexOf('显示')>=0;
+    cns.forEach(function(cn){
+      if(hidden){
+        cn.classList.remove('hidden');
+        cn.style.visibility='visible';
+      }else{
+        cn.style.visibility='hidden';
+      }
+    });
+    toggleBtn.textContent=hidden?'🙈 隐藏中文':'👀 显示中文';
+  });
+}
 })();
 </script>
 </body>
