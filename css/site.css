@@ -1,4 +1,4 @@
-/* NCE Static Site + Audio */
+/* NCE Learning Site - Static + Audio Timestamps */
 :root {
   --primary: #4f46e5; --primary-hover: #4338ca; --primary-light: #eef2ff;
   --accent: #f59e0b; --success: #10b981;
@@ -20,17 +20,14 @@ a:hover{text-decoration:underline}
 .header-nav a{font-size:0.875rem;color:var(--text-secondary);padding:6px 12px;border-radius:6px}
 .header-nav a:hover{background:var(--border-light);text-decoration:none}
 
-/* Study Page */
-.study-page{max-width:1400px;margin:0 auto;min-height:calc(100vh - var(--header-h));display:flex;flex-direction:column}
-
-/* Top Bar with Audio */
+/* Top Bar */
 .topbar{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--white);border-bottom:1px solid var(--border);flex-wrap:wrap}
 .topbar .back{font-size:0.85rem;color:var(--text-secondary);padding:4px 8px;border-radius:4px;white-space:nowrap}
 .topbar .back:hover{background:var(--border-light);text-decoration:none}
 .topbar .title-area{flex:1;min-width:0}
 .topbar .lesson-num{font-size:0.75rem;font-weight:700;color:var(--text-muted)}
 .topbar .lesson-title{font-size:0.9rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.play-btn{width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.85rem;cursor:pointer;border:none;flex-shrink:0;transition:background 0.15s}
+.play-btn{width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.85rem;cursor:pointer;border:none;flex-shrink:0}
 .play-btn:hover{background:var(--primary-hover)}
 .play-btn.on{background:var(--accent)}
 .audio-track{flex:1;height:6px;background:var(--border);border-radius:3px;cursor:pointer;min-width:60px;position:relative}
@@ -41,10 +38,19 @@ a:hover{text-decoration:underline}
 .nav-link:hover{background:var(--border);text-decoration:none}
 .nav-link.na{opacity:0.4;cursor:default}
 
-/* Main Two-Column */
+/* Study Main - Two Column */
+.study-page{max-width:1400px;margin:0 auto;min-height:calc(100vh - var(--header-h));display:flex;flex-direction:column}
 .study-main{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0}
 .study-left{padding:16px 20px;overflow-y:auto;border-right:1px solid var(--border);background:var(--white)}
 .study-right{padding:16px 20px;overflow-y:auto;background:var(--bg)}
+@media(max-width:768px){
+  .study-main{grid-template-columns:1fr}
+  .study-left{border-right:none;border-bottom:1px solid var(--border);max-height:50vh;overflow-y:auto}
+  .study-right{max-height:none;overflow-y:visible}
+  .topbar{padding:6px 10px}
+  .topbar .lesson-title{font-size:0.8rem}
+  .study-left,.study-right{padding:12px}
+}
 
 /* Sentences */
 .sentence-list{display:flex;flex-direction:column;gap:2px}
@@ -64,8 +70,8 @@ a:hover{text-decoration:underline}
 .vocab-grid{display:flex;flex-wrap:wrap;gap:4px}
 .vocab-grid .word-item{background:var(--white);border-radius:4px;padding:6px 10px;border:1px solid var(--border-light);display:inline-flex;gap:4px;align-items:baseline}
 .vocab-grid .word-item .en{font-weight:600;font-size:0.85rem}
+.vocab-grid .word-item .pos{font-size:0.7rem;color:var(--text-muted)}
 .vocab-grid .word-item .cn{font-size:0.8rem;color:var(--text-secondary)}
-.text-muted{color:var(--text-muted);font-size:0.85rem}
 
 /* Notes */
 .notes-content{padding:12px 16px;background:var(--white);border-radius:8px;border:1px solid var(--border);font-size:0.9rem;line-height:1.7}
@@ -80,15 +86,3 @@ a:hover{text-decoration:underline}
 .btn-link:hover{background:var(--border);text-decoration:none}
 .btn-primary{background:var(--primary);color:#fff}
 .btn-primary:hover{background:var(--primary-hover);text-decoration:none}
-
-/* Mobile */
-@media(max-width:768px){
-  .study-main{grid-template-columns:1fr}
-  .study-left{border-right:none;border-bottom:1px solid var(--border);max-height:50vh;overflow-y:auto}
-  .study-right{max-height:none;overflow-y:visible}
-  .topbar{padding:6px 10px}
-  .topbar .lesson-title{font-size:0.8rem}
-  .study-left,.study-right{padding:12px}
-  .sentence-item{padding:8px 10px}
-  .sentence-item .text{font-size:0.95rem}
-}
