@@ -13,167 +13,174 @@
 </header>
 
 <div class="study-page">
+  <!-- Top Bar -->
   <div class="topbar">
     <a href="/" class="back">← 返回</a>
     <div class="title-area">
       <div class="lesson-num">第 135-136 课</div>
       <div class="lesson-title">The latest report最新报道</div>
     </div>
+    <!-- Audio play button + progress -->
+    <button class="play-btn" id="playBtn" onclick="ta()" title="播放/暂停">▶</button>
+    <div class="audio-track" id="track" onclick="sk(event)">
+      <div class="audio-fill" id="fill"></div>
+    </div>
+    <span class="audio-time" id="curTime">0:00</span>
     <div class="top-links">
       <a href='/lesson/133-134.html' class='nav-link'>← 上一课</a>
       <a href='/lesson/137-138.html' class='nav-link'>下一课 →</a>
-      <a href="https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/135%26136%EF%BC%8DThe%20Latest%20Report.mp3" class="nav-link" target="_blank">⬇ 音频</a>
     </div>
   </div>
 
+  <!-- Main Two-Column -->
   <div class="study-main">
     <div class="study-left">
       <div class="sentence-list">
-<a href="#s1" class="sentence-item" id="s1">
+<a href="#s1" class="sentence-item" id="s1" data-idx="0" data-cum="0" data-chars="53" data-total="1430">
   <span class="idx">1</span>
   <span class="text">Reporter: Are you really going to retire, Miss marsh?</span>
 </a>
-<a href="#s2" class="sentence-item" id="s2">
+<a href="#s2" class="sentence-item" id="s2" data-idx="1" data-cum="53" data-chars="18" data-total="1430">
   <span class="idx">2</span>
   <span class="text">Miss Marsh: I may.</span>
 </a>
-<a href="#s3" class="sentence-item" id="s3">
+<a href="#s3" class="sentence-item" id="s3" data-idx="2" data-cum="71" data-chars="24" data-total="1430">
   <span class="idx">3</span>
   <span class="text">I can&#x27;t make up my mind.</span>
 </a>
-<a href="#s4" class="sentence-item" id="s4">
+<a href="#s4" class="sentence-item" id="s4" data-idx="3" data-cum="95" data-chars="38" data-total="1430">
   <span class="idx">4</span>
   <span class="text">I shall have to ask my future husband.</span>
 </a>
-<a href="#s5" class="sentence-item" id="s5">
+<a href="#s5" class="sentence-item" id="s5" data-idx="4" data-cum="133" data-chars="34" data-total="1430">
   <span class="idx">5</span>
   <span class="text">He won&#x27;t let me make another film.</span>
 </a>
-<a href="#s6" class="sentence-item" id="s6">
+<a href="#s6" class="sentence-item" id="s6" data-idx="5" data-cum="167" data-chars="42" data-total="1430">
   <span class="idx">6</span>
   <span class="text">Reporter: Your future husband, Miss Marsh?</span>
 </a>
-<a href="#s7" class="sentence-item" id="s7">
+<a href="#s7" class="sentence-item" id="s7" data-idx="6" data-cum="209" data-chars="16" data-total="1430">
   <span class="idx">7</span>
   <span class="text">Miss Marsh: Yes.</span>
 </a>
-<a href="#s8" class="sentence-item" id="s8">
+<a href="#s8" class="sentence-item" id="s8" data-idx="7" data-cum="225" data-chars="28" data-total="1430">
   <span class="idx">8</span>
   <span class="text">Let me introduce him to you.</span>
 </a>
-<a href="#s9" class="sentence-item" id="s9">
+<a href="#s9" class="sentence-item" id="s9" data-idx="8" data-cum="253" data-chars="19" data-total="1430">
   <span class="idx">9</span>
   <span class="text">His name is Carlos.</span>
 </a>
-<a href="#s10" class="sentence-item" id="s10">
+<a href="#s10" class="sentence-item" id="s10" data-idx="9" data-cum="272" data-chars="38" data-total="1430">
   <span class="idx">10</span>
   <span class="text">We are going to get married next week.</span>
 </a>
-<a href="#s11" class="sentence-item" id="s11">
+<a href="#s11" class="sentence-item" id="s11" data-idx="10" data-cum="310" data-chars="19" data-total="1430">
   <span class="idx">11</span>
   <span class="text">Kate: Look, Millie!</span>
 </a>
-<a href="#s12" class="sentence-item" id="s12">
+<a href="#s12" class="sentence-item" id="s12" data-idx="11" data-cum="329" data-chars="40" data-total="1430">
   <span class="idx">12</span>
   <span class="text">Here&#x27;s another report about Karen Marsh.</span>
 </a>
-<a href="#s13" class="sentence-item" id="s13">
+<a href="#s13" class="sentence-item" id="s13" data-idx="12" data-cum="369" data-chars="32" data-total="1430">
   <span class="idx">13</span>
   <span class="text">Listen:&quot;Karen Marsh: The Latest.</span>
 </a>
-<a href="#s14" class="sentence-item" id="s14">
+<a href="#s14" class="sentence-item" id="s14" data-idx="13" data-cum="401" data-chars="69" data-total="1430">
   <span class="idx">14</span>
   <span class="text">At her London Hotel today Miss Marsh told reporters she might retire.</span>
 </a>
-<a href="#s15" class="sentence-item" id="s15">
+<a href="#s15" class="sentence-item" id="s15" data-idx="14" data-cum="470" data-chars="39" data-total="1430">
   <span class="idx">15</span>
   <span class="text">She said she couldn&#x27;t make up her mind.</span>
 </a>
-<a href="#s16" class="sentence-item" id="s16">
+<a href="#s16" class="sentence-item" id="s16" data-idx="15" data-cum="509" data-chars="50" data-total="1430">
   <span class="idx">16</span>
   <span class="text">She said she would have to ask her future husband.</span>
 </a>
-<a href="#s17" class="sentence-item" id="s17">
+<a href="#s17" class="sentence-item" id="s17" data-idx="16" data-cum="559" data-chars="64" data-total="1430">
   <span class="idx">17</span>
   <span class="text">She said her future husband would not let her make another film.</span>
 </a>
-<a href="#s18" class="sentence-item" id="s18">
+<a href="#s18" class="sentence-item" id="s18" data-idx="17" data-cum="623" data-chars="78" data-total="1430">
   <span class="idx">18</span>
   <span class="text">Then she introduced us to Carlos and told us they would get married next week.</span>
 </a>
-<a href="#s19" class="sentence-item" id="s19">
+<a href="#s19" class="sentence-item" id="s19" data-idx="18" data-cum="701" data-chars="49" data-total="1430">
   <span class="idx">19</span>
   <span class="text">&quot;Millie: That&#x27;s sensational news, isn&#x27;t it, Kate?</span>
 </a>
-<a href="#s20" class="sentence-item" id="s20">
+<a href="#s20" class="sentence-item" id="s20" data-idx="19" data-cum="750" data-chars="21" data-total="1430">
   <span class="idx">20</span>
   <span class="text">Kate:It certainly is.</span>
 </a>
-<a href="#s21" class="sentence-item" id="s21">
+<a href="#s21" class="sentence-item" id="s21" data-idx="20" data-cum="771" data-chars="27" data-total="1430">
   <span class="idx">21</span>
   <span class="text">He&#x27;ll be her sixth husband!</span>
 </a>
-<a href="#s22" class="sentence-item" id="s22">
+<a href="#s22" class="sentence-item" id="s22" data-idx="21" data-cum="798" data-chars="42" data-total="1430">
   <span class="idx">22</span>
   <span class="text">Reporter: Your future husband, Miss Marsh?</span>
 </a>
-<a href="#s23" class="sentence-item" id="s23">
+<a href="#s23" class="sentence-item" id="s23" data-idx="22" data-cum="840" data-chars="16" data-total="1430">
   <span class="idx">23</span>
   <span class="text">Miss Marsh: Yes.</span>
 </a>
-<a href="#s24" class="sentence-item" id="s24">
+<a href="#s24" class="sentence-item" id="s24" data-idx="23" data-cum="856" data-chars="28" data-total="1430">
   <span class="idx">24</span>
   <span class="text">Let me introduce him to you.</span>
 </a>
-<a href="#s25" class="sentence-item" id="s25">
+<a href="#s25" class="sentence-item" id="s25" data-idx="24" data-cum="884" data-chars="19" data-total="1430">
   <span class="idx">25</span>
   <span class="text">His name is Carlos.</span>
 </a>
-<a href="#s26" class="sentence-item" id="s26">
+<a href="#s26" class="sentence-item" id="s26" data-idx="25" data-cum="903" data-chars="38" data-total="1430">
   <span class="idx">26</span>
   <span class="text">We are going to get married next week.</span>
 </a>
-<a href="#s27" class="sentence-item" id="s27">
+<a href="#s27" class="sentence-item" id="s27" data-idx="26" data-cum="941" data-chars="19" data-total="1430">
   <span class="idx">27</span>
   <span class="text">Kate: Look, Millie!</span>
 </a>
-<a href="#s28" class="sentence-item" id="s28">
+<a href="#s28" class="sentence-item" id="s28" data-idx="27" data-cum="960" data-chars="40" data-total="1430">
   <span class="idx">28</span>
   <span class="text">Here&#x27;s another report about Karen Marsh.</span>
 </a>
-<a href="#s29" class="sentence-item" id="s29">
+<a href="#s29" class="sentence-item" id="s29" data-idx="28" data-cum="1000" data-chars="33" data-total="1430">
   <span class="idx">29</span>
   <span class="text">Listen:“ Karen Marsh: The Latest.</span>
 </a>
-<a href="#s30" class="sentence-item" id="s30">
+<a href="#s30" class="sentence-item" id="s30" data-idx="29" data-cum="1033" data-chars="69" data-total="1430">
   <span class="idx">30</span>
   <span class="text">At her London Hotel today Miss Marsh told reporters she might retire.</span>
 </a>
-<a href="#s31" class="sentence-item" id="s31">
+<a href="#s31" class="sentence-item" id="s31" data-idx="30" data-cum="1102" data-chars="39" data-total="1430">
   <span class="idx">31</span>
   <span class="text">She said she couldn&#x27;t make up her mind.</span>
 </a>
-<a href="#s32" class="sentence-item" id="s32">
+<a href="#s32" class="sentence-item" id="s32" data-idx="31" data-cum="1141" data-chars="50" data-total="1430">
   <span class="idx">32</span>
   <span class="text">She said she would have to ask her future husband.</span>
 </a>
-<a href="#s33" class="sentence-item" id="s33">
+<a href="#s33" class="sentence-item" id="s33" data-idx="32" data-cum="1191" data-chars="64" data-total="1430">
   <span class="idx">33</span>
   <span class="text">She said her future husband would not let her make another film.</span>
 </a>
-<a href="#s34" class="sentence-item" id="s34">
+<a href="#s34" class="sentence-item" id="s34" data-idx="33" data-cum="1255" data-chars="78" data-total="1430">
   <span class="idx">34</span>
   <span class="text">Then she introduced us to Carlos and told us they would get married next week.</span>
 </a>
-<a href="#s35" class="sentence-item" id="s35">
+<a href="#s35" class="sentence-item" id="s35" data-idx="34" data-cum="1333" data-chars="49" data-total="1430">
   <span class="idx">35</span>
   <span class="text">”Millie: That&#x27;s sensational news, isn&#x27;t it, Kate?</span>
 </a>
-<a href="#s36" class="sentence-item" id="s36">
+<a href="#s36" class="sentence-item" id="s36" data-idx="35" data-cum="1382" data-chars="21" data-total="1430">
   <span class="idx">36</span>
   <span class="text">Kate:It certainly is.</span>
 </a>
-<a href="#s37" class="sentence-item" id="s37">
+<a href="#s37" class="sentence-item" id="s37" data-idx="36" data-cum="1403" data-chars="27" data-total="1430">
   <span class="idx">37</span>
   <span class="text">He&#x27;ll be her sixth husband!</span>
 </a>
@@ -200,6 +207,7 @@
     </div>
   </div>
 
+  <!-- Bottom Bar -->
   <div class="bottombar">
     <div class="left">
       <a href="#" class="btn-link">↑ 顶部</a>
@@ -210,5 +218,58 @@
     </div>
   </div>
 </div>
+
+<!-- Minimal inline JS for audio seeking (progressive enhancement) -->
+<script>
+var au = new Audio(&quot;https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/135%26136%EF%BC%8DThe%20Latest%20Report.mp3&quot;);
+var pl = document.getElementById('playBtn');
+var fl = document.getElementById('fill');
+var ct = document.getElementById('curTime');
+var tr = document.getElementById('track');
+var playing = false;
+
+au.addEventListener('timeupdate',function(){
+  if(au.duration){
+    fl.style.width=(au.currentTime/au.duration*100)+'%';
+    var m=Math.floor(au.currentTime/60),s=Math.floor(au.currentTime%60);
+    ct.textContent=m+':'+(s<10?'0':'')+s;
+  }
+});
+au.addEventListener('ended',function(){
+  playing=false;pl.textContent='▶';pl.classList.remove('on');
+});
+
+function ta(){
+  if(au.paused||au.ended){au.play();pl.textContent='⏸';pl.classList.add('on');}
+  else{au.pause();pl.textContent='▶';pl.classList.remove('on');}
+}
+
+function sk(e){
+  if(!au.duration)return;
+  var r=tr.getBoundingClientRect();
+  au.currentTime=((e.clientX-r.left)/r.width)*au.duration;
+}
+
+// Click sentence → seek & play
+document.querySelectorAll('.sentence-item').forEach(function(el){
+  el.addEventListener('click',function(e){
+    e.preventDefault();
+    var cum=parseInt(el.dataset.cum);
+    var total=parseInt(el.dataset.total);
+    if(au.duration&&total>0){
+      au.currentTime=(cum/total)*au.duration;
+      au.play();
+      pl.textContent='⏸';pl.classList.add('on');
+    }
+    // Update highlight manually
+    document.querySelectorAll('.sentence-item').forEach(function(x){x.classList.remove('s-target')});
+    el.classList.add('s-target');
+    // Scroll to sentence
+    el.scrollIntoView({block:'nearest',behavior:'smooth'});
+    // Update URL hash
+    history.replaceState(null,'',el.getAttribute('href'));
+  });
+});
+</script>
 </body>
 </html>

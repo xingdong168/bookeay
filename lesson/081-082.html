@@ -13,119 +13,126 @@
 </header>
 
 <div class="study-page">
+  <!-- Top Bar -->
   <div class="topbar">
     <a href="/" class="back">← 返回</a>
     <div class="title-area">
       <div class="lesson-num">第 081-082 课</div>
       <div class="lesson-title">Roast beef and potato烤牛肉和土豆</div>
     </div>
+    <!-- Audio play button + progress -->
+    <button class="play-btn" id="playBtn" onclick="ta()" title="播放/暂停">▶</button>
+    <div class="audio-track" id="track" onclick="sk(event)">
+      <div class="audio-fill" id="fill"></div>
+    </div>
+    <span class="audio-time" id="curTime">0:00</span>
     <div class="top-links">
       <a href='/lesson/079-080.html' class='nav-link'>← 上一课</a>
       <a href='/lesson/083-084.html' class='nav-link'>下一课 →</a>
-      <a href="https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/081%26082%EF%BC%8DRoast%20Beef%20and%20Potatoes.mp3" class="nav-link" target="_blank">⬇ 音频</a>
     </div>
   </div>
 
+  <!-- Main Two-Column -->
   <div class="study-main">
     <div class="study-left">
       <div class="sentence-list">
-<a href="#s1" class="sentence-item" id="s1">
+<a href="#s1" class="sentence-item" id="s1" data-idx="0" data-cum="0" data-chars="19" data-total="564">
   <span class="idx">1</span>
   <span class="text">John: Hullo, Peggy!</span>
 </a>
-<a href="#s2" class="sentence-item" id="s2">
+<a href="#s2" class="sentence-item" id="s2" data-idx="1" data-cum="19" data-chars="12" data-total="564">
   <span class="idx">2</span>
   <span class="text">Where&#x27;s Tom?</span>
 </a>
-<a href="#s3" class="sentence-item" id="s3">
+<a href="#s3" class="sentence-item" id="s3" data-idx="2" data-cum="31" data-chars="21" data-total="564">
   <span class="idx">3</span>
   <span class="text">Peggy: He&#x27;s upstairs.</span>
 </a>
-<a href="#s4" class="sentence-item" id="s4">
+<a href="#s4" class="sentence-item" id="s4" data-idx="3" data-cum="52" data-chars="19" data-total="564">
   <span class="idx">4</span>
   <span class="text">He&#x27;s having a bath.</span>
 </a>
-<a href="#s5" class="sentence-item" id="s5">
+<a href="#s5" class="sentence-item" id="s5" data-idx="4" data-cum="71" data-chars="11" data-total="564">
   <span class="idx">5</span>
   <span class="text">Peggy: Tom!</span>
 </a>
-<a href="#s6" class="sentence-item" id="s6">
+<a href="#s6" class="sentence-item" id="s6" data-idx="5" data-cum="82" data-chars="9" data-total="564">
   <span class="idx">6</span>
   <span class="text">Tom: Yes?</span>
 </a>
-<a href="#s7" class="sentence-item" id="s7">
+<a href="#s7" class="sentence-item" id="s7" data-idx="6" data-cum="91" data-chars="19" data-total="564">
   <span class="idx">7</span>
   <span class="text">Peggy: John&#x27;s here.</span>
 </a>
-<a href="#s8" class="sentence-item" id="s8">
+<a href="#s8" class="sentence-item" id="s8" data-idx="7" data-cum="110" data-chars="22" data-total="564">
   <span class="idx">8</span>
   <span class="text">Tom: I&#x27;m nearly ready.</span>
 </a>
-<a href="#s9" class="sentence-item" id="s9">
+<a href="#s9" class="sentence-item" id="s9" data-idx="8" data-cum="132" data-chars="17" data-total="564">
   <span class="idx">9</span>
   <span class="text">Tom: Hullo, John.</span>
 </a>
-<a href="#s10" class="sentence-item" id="s10">
+<a href="#s10" class="sentence-item" id="s10" data-idx="9" data-cum="149" data-chars="17" data-total="564">
   <span class="idx">10</span>
   <span class="text">Have a cigarette.</span>
 </a>
-<a href="#s11" class="sentence-item" id="s11">
+<a href="#s11" class="sentence-item" id="s11" data-idx="10" data-cum="166" data-chars="21" data-total="564">
   <span class="idx">11</span>
   <span class="text">John: No thanks, Tom.</span>
 </a>
-<a href="#s12" class="sentence-item" id="s12">
+<a href="#s12" class="sentence-item" id="s12" data-idx="11" data-cum="187" data-chars="33" data-total="564">
   <span class="idx">12</span>
   <span class="text">Tom: Have a glass of whisky then.</span>
 </a>
-<a href="#s13" class="sentence-item" id="s13">
+<a href="#s13" class="sentence-item" id="s13" data-idx="12" data-cum="220" data-chars="8" data-total="564">
   <span class="idx">13</span>
   <span class="text">John: O.</span>
 </a>
-<a href="#s14" class="sentence-item" id="s14">
+<a href="#s14" class="sentence-item" id="s14" data-idx="13" data-cum="228" data-chars="2" data-total="564">
   <span class="idx">14</span>
   <span class="text">K.</span>
 </a>
-<a href="#s15" class="sentence-item" id="s15">
+<a href="#s15" class="sentence-item" id="s15" data-idx="14" data-cum="230" data-chars="7" data-total="564">
   <span class="idx">15</span>
   <span class="text">Thanks.</span>
 </a>
-<a href="#s16" class="sentence-item" id="s16">
+<a href="#s16" class="sentence-item" id="s16" data-idx="15" data-cum="237" data-chars="28" data-total="564">
   <span class="idx">16</span>
   <span class="text">Tom: Is dinner ready, Peggy?</span>
 </a>
-<a href="#s17" class="sentence-item" id="s17">
+<a href="#s17" class="sentence-item" id="s17" data-idx="16" data-cum="265" data-chars="25" data-total="564">
   <span class="idx">17</span>
   <span class="text">Peggy: It&#x27;s nearly ready.</span>
 </a>
-<a href="#s18" class="sentence-item" id="s18">
+<a href="#s18" class="sentence-item" id="s18" data-idx="17" data-cum="290" data-chars="36" data-total="564">
   <span class="idx">18</span>
   <span class="text">We can have dinner at seven o&#x27;clock.</span>
 </a>
-<a href="#s19" class="sentence-item" id="s19">
+<a href="#s19" class="sentence-item" id="s19" data-idx="18" data-cum="326" data-chars="41" data-total="564">
   <span class="idx">19</span>
   <span class="text">Tom: John and I had lunch together today.</span>
 </a>
-<a href="#s20" class="sentence-item" id="s20">
+<a href="#s20" class="sentence-item" id="s20" data-idx="19" data-cum="367" data-chars="24" data-total="564">
   <span class="idx">20</span>
   <span class="text">We went to a restaurant.</span>
 </a>
-<a href="#s21" class="sentence-item" id="s21">
+<a href="#s21" class="sentence-item" id="s21" data-idx="20" data-cum="391" data-chars="25" data-total="564">
   <span class="idx">21</span>
   <span class="text">Peggy: What did you have?</span>
 </a>
-<a href="#s22" class="sentence-item" id="s22">
+<a href="#s22" class="sentence-item" id="s22" data-idx="21" data-cum="416" data-chars="36" data-total="564">
   <span class="idx">22</span>
   <span class="text">Tom: We had roast beef and potatoes.</span>
 </a>
-<a href="#s23" class="sentence-item" id="s23">
+<a href="#s23" class="sentence-item" id="s23" data-idx="22" data-cum="452" data-chars="10" data-total="564">
   <span class="idx">23</span>
   <span class="text">Peggy: Oh!</span>
 </a>
-<a href="#s24" class="sentence-item" id="s24">
+<a href="#s24" class="sentence-item" id="s24" data-idx="23" data-cum="462" data-chars="30" data-total="564">
   <span class="idx">24</span>
   <span class="text">Tom: What&#x27;s the matter, Peggy?</span>
 </a>
-<a href="#s25" class="sentence-item" id="s25">
+<a href="#s25" class="sentence-item" id="s25" data-idx="24" data-cum="492" data-chars="72" data-total="564">
   <span class="idx">25</span>
   <span class="text">Peggy: Well, you&#x27;re going to have roast beef and potatoes again tonight!</span>
 </a>
@@ -153,6 +160,7 @@
     </div>
   </div>
 
+  <!-- Bottom Bar -->
   <div class="bottombar">
     <div class="left">
       <a href="#" class="btn-link">↑ 顶部</a>
@@ -163,5 +171,58 @@
     </div>
   </div>
 </div>
+
+<!-- Minimal inline JS for audio seeking (progressive enhancement) -->
+<script>
+var au = new Audio(&quot;https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/081%26082%EF%BC%8DRoast%20Beef%20and%20Potatoes.mp3&quot;);
+var pl = document.getElementById('playBtn');
+var fl = document.getElementById('fill');
+var ct = document.getElementById('curTime');
+var tr = document.getElementById('track');
+var playing = false;
+
+au.addEventListener('timeupdate',function(){
+  if(au.duration){
+    fl.style.width=(au.currentTime/au.duration*100)+'%';
+    var m=Math.floor(au.currentTime/60),s=Math.floor(au.currentTime%60);
+    ct.textContent=m+':'+(s<10?'0':'')+s;
+  }
+});
+au.addEventListener('ended',function(){
+  playing=false;pl.textContent='▶';pl.classList.remove('on');
+});
+
+function ta(){
+  if(au.paused||au.ended){au.play();pl.textContent='⏸';pl.classList.add('on');}
+  else{au.pause();pl.textContent='▶';pl.classList.remove('on');}
+}
+
+function sk(e){
+  if(!au.duration)return;
+  var r=tr.getBoundingClientRect();
+  au.currentTime=((e.clientX-r.left)/r.width)*au.duration;
+}
+
+// Click sentence → seek & play
+document.querySelectorAll('.sentence-item').forEach(function(el){
+  el.addEventListener('click',function(e){
+    e.preventDefault();
+    var cum=parseInt(el.dataset.cum);
+    var total=parseInt(el.dataset.total);
+    if(au.duration&&total>0){
+      au.currentTime=(cum/total)*au.duration;
+      au.play();
+      pl.textContent='⏸';pl.classList.add('on');
+    }
+    // Update highlight manually
+    document.querySelectorAll('.sentence-item').forEach(function(x){x.classList.remove('s-target')});
+    el.classList.add('s-target');
+    // Scroll to sentence
+    el.scrollIntoView({block:'nearest',behavior:'smooth'});
+    // Update URL hash
+    history.replaceState(null,'',el.getAttribute('href'));
+  });
+});
+</script>
 </body>
 </html>

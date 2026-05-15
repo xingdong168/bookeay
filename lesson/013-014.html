@@ -13,71 +13,78 @@
 </header>
 
 <div class="study-page">
+  <!-- Top Bar -->
   <div class="topbar">
     <a href="/" class="back">← 返回</a>
     <div class="title-area">
       <div class="lesson-num">第 013-014 课</div>
       <div class="lesson-title">A new dress 一件新连衣裙</div>
     </div>
+    <!-- Audio play button + progress -->
+    <button class="play-btn" id="playBtn" onclick="ta()" title="播放/暂停">▶</button>
+    <div class="audio-track" id="track" onclick="sk(event)">
+      <div class="audio-fill" id="fill"></div>
+    </div>
+    <span class="audio-time" id="curTime">0:00</span>
     <div class="top-links">
       <a href='/lesson/011-012.html' class='nav-link'>← 上一课</a>
       <a href='/lesson/015-016.html' class='nav-link'>下一课 →</a>
-      <a href="https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/013%26014%EF%BC%8DA%20New%20Dress.mp3" class="nav-link" target="_blank">⬇ 音频</a>
     </div>
   </div>
 
+  <!-- Main Two-Column -->
   <div class="study-main">
     <div class="study-left">
       <div class="sentence-list">
-<a href="#s1" class="sentence-item" id="s1">
+<a href="#s1" class="sentence-item" id="s1" data-idx="0" data-cum="0" data-chars="37" data-total="291">
   <span class="idx">1</span>
   <span class="text">LOUISE: What colour&#x27;s your new dress?</span>
 </a>
-<a href="#s2" class="sentence-item" id="s2">
+<a href="#s2" class="sentence-item" id="s2" data-idx="1" data-cum="37" data-chars="17" data-total="291">
   <span class="idx">2</span>
   <span class="text">ANNA: It&#x27;s green.</span>
 </a>
-<a href="#s3" class="sentence-item" id="s3">
+<a href="#s3" class="sentence-item" id="s3" data-idx="2" data-cum="54" data-chars="31" data-total="291">
   <span class="idx">3</span>
   <span class="text">ANNA: Come upstairs and see it.</span>
 </a>
-<a href="#s4" class="sentence-item" id="s4">
+<a href="#s4" class="sentence-item" id="s4" data-idx="3" data-cum="85" data-chars="18" data-total="291">
   <span class="idx">4</span>
   <span class="text">LOUISE: Thank you.</span>
 </a>
-<a href="#s5" class="sentence-item" id="s5">
+<a href="#s5" class="sentence-item" id="s5" data-idx="4" data-cum="103" data-chars="11" data-total="291">
   <span class="idx">5</span>
   <span class="text">ANNA: Look!</span>
 </a>
-<a href="#s6" class="sentence-item" id="s6">
+<a href="#s6" class="sentence-item" id="s6" data-idx="5" data-cum="114" data-chars="11" data-total="291">
   <span class="idx">6</span>
   <span class="text">Here it is!</span>
 </a>
-<a href="#s7" class="sentence-item" id="s7">
+<a href="#s7" class="sentence-item" id="s7" data-idx="6" data-cum="125" data-chars="28" data-total="291">
   <span class="idx">7</span>
   <span class="text">LOUISE: That&#x27;s a nice dress.</span>
 </a>
-<a href="#s8" class="sentence-item" id="s8">
+<a href="#s8" class="sentence-item" id="s8" data-idx="7" data-cum="153" data-chars="16" data-total="291">
   <span class="idx">8</span>
   <span class="text">It&#x27;s very smart.</span>
 </a>
-<a href="#s9" class="sentence-item" id="s9">
+<a href="#s9" class="sentence-item" id="s9" data-idx="8" data-cum="169" data-chars="24" data-total="291">
   <span class="idx">9</span>
   <span class="text">ANNA: My hat&#x27;s new, too.</span>
 </a>
-<a href="#s10" class="sentence-item" id="s10">
+<a href="#s10" class="sentence-item" id="s10" data-idx="9" data-cum="193" data-chars="26" data-total="291">
   <span class="idx">10</span>
   <span class="text">LOUISE: What colour is it?</span>
 </a>
-<a href="#s11" class="sentence-item" id="s11">
+<a href="#s11" class="sentence-item" id="s11" data-idx="10" data-cum="219" data-chars="27" data-total="291">
   <span class="idx">11</span>
   <span class="text">ANNA: It&#x27;s the same colour.</span>
 </a>
-<a href="#s12" class="sentence-item" id="s12">
+<a href="#s12" class="sentence-item" id="s12" data-idx="11" data-cum="246" data-chars="16" data-total="291">
   <span class="idx">12</span>
   <span class="text">It&#x27;s green, too.</span>
 </a>
-<a href="#s13" class="sentence-item" id="s13">
+<a href="#s13" class="sentence-item" id="s13" data-idx="12" data-cum="262" data-chars="29" data-total="291">
   <span class="idx">13</span>
   <span class="text">LOUISE: That is a lovely hat!</span>
 </a>
@@ -108,6 +115,7 @@
     </div>
   </div>
 
+  <!-- Bottom Bar -->
   <div class="bottombar">
     <div class="left">
       <a href="#" class="btn-link">↑ 顶部</a>
@@ -118,5 +126,58 @@
     </div>
   </div>
 </div>
+
+<!-- Minimal inline JS for audio seeking (progressive enhancement) -->
+<script>
+var au = new Audio(&quot;https://r2.xingdong168.com/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD%E7%AC%AC%E4%B8%80%E5%86%8C%E5%BD%95%E9%9F%B3/013%26014%EF%BC%8DA%20New%20Dress.mp3&quot;);
+var pl = document.getElementById('playBtn');
+var fl = document.getElementById('fill');
+var ct = document.getElementById('curTime');
+var tr = document.getElementById('track');
+var playing = false;
+
+au.addEventListener('timeupdate',function(){
+  if(au.duration){
+    fl.style.width=(au.currentTime/au.duration*100)+'%';
+    var m=Math.floor(au.currentTime/60),s=Math.floor(au.currentTime%60);
+    ct.textContent=m+':'+(s<10?'0':'')+s;
+  }
+});
+au.addEventListener('ended',function(){
+  playing=false;pl.textContent='▶';pl.classList.remove('on');
+});
+
+function ta(){
+  if(au.paused||au.ended){au.play();pl.textContent='⏸';pl.classList.add('on');}
+  else{au.pause();pl.textContent='▶';pl.classList.remove('on');}
+}
+
+function sk(e){
+  if(!au.duration)return;
+  var r=tr.getBoundingClientRect();
+  au.currentTime=((e.clientX-r.left)/r.width)*au.duration;
+}
+
+// Click sentence → seek & play
+document.querySelectorAll('.sentence-item').forEach(function(el){
+  el.addEventListener('click',function(e){
+    e.preventDefault();
+    var cum=parseInt(el.dataset.cum);
+    var total=parseInt(el.dataset.total);
+    if(au.duration&&total>0){
+      au.currentTime=(cum/total)*au.duration;
+      au.play();
+      pl.textContent='⏸';pl.classList.add('on');
+    }
+    // Update highlight manually
+    document.querySelectorAll('.sentence-item').forEach(function(x){x.classList.remove('s-target')});
+    el.classList.add('s-target');
+    // Scroll to sentence
+    el.scrollIntoView({block:'nearest',behavior:'smooth'});
+    // Update URL hash
+    history.replaceState(null,'',el.getAttribute('href'));
+  });
+});
+</script>
 </body>
 </html>
